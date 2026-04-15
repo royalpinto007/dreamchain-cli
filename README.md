@@ -15,31 +15,23 @@ This acts as a simple bridge between conversations and actual execution by conve
 
 ## Installation
 
-Clone the repo:
-
 ```bash
 git clone <your-repo-link>
 cd dreamchain-cli
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-Build the project:
-
-```bash
 npm run build
 ```
 
-This uses the `build` script in `package.json` (which runs `tsc`).
-
-Link CLI globally:
+After publishing, install it globally with:
 
 ```bash
-npm link
+npm install -g dreamchain-cli
+```
+
+Or run it without installing globally:
+
+```bash
+npx dreamchain-cli dreamchain list
 ```
 
 ## Usage
@@ -47,37 +39,37 @@ npm link
 ### Create a task
 
 ```bash
-task create "setup node infra" --owner=victor --priority=high
+dreamchain create "setup node infra" --owner=victor --priority=high
 ```
 
 ### List all tasks
 
 ```bash
-task list
+dreamchain list
 ```
 
 ### Filter tasks by status
 
 ```bash
-task list --status=pending
+dreamchain list --status=pending
 ```
 
 ### Update a task
 
 ```bash
-task update 1 --status=in-progress
+dreamchain update 1 --status=in-progress
 ```
 
 ### Assign/Reassign a task
 
 ```bash
-task assign 1 --owner=royal
+dreamchain assign 1 --owner=royal
 ```
 
 ### View a task
 
 ```bash
-task view 1
+dreamchain view 1
 ```
 
 ## Task Model
@@ -95,13 +87,26 @@ Each task contains:
 
 ## Data Storage
 
-All tasks are stored locally in:
-
-```
-src/storage/db.json
-```
+All tasks are stored locally in `~/.dreamchain/db.json`.
 
 This keeps the tool simple and allows fast iteration without external dependencies.
+
+## Publishing
+
+This package is ready to publish to npm with:
+
+```bash
+npm publish
+```
+
+Before publishing, make sure the `repository`, `homepage`, and `bugs` URLs in `package.json` point to the real GitHub repo.
+
+## Release Checklist
+
+1. Update the version in `package.json` if needed.
+2. Run `npm install` and `npm run build`.
+3. Verify the CLI works from `dist/index.js`.
+4. Publish with `npm publish --access public`.
 
 ## Workflow
 

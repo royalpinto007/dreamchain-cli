@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 
-const dbPath = path.resolve(__dirname, "../../src/storage/db.json");
+const dataDir = path.join(os.homedir(), ".dreamchain");
+const dbPath = path.join(dataDir, "db.json");
 
 type Task = {
   id: number;
@@ -15,6 +17,14 @@ type Task = {
 };
 
 function readDB(): { tasks: Task[] } {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
+  if (!fs.existsSync(dbPath)) {
+    fs.writeFileSync(dbPath, JSON.stringify({ tasks: [] }, null, 2));
+  }
+
   const data = fs.readFileSync(dbPath, "utf-8");
   return JSON.parse(data);
 }

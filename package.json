@@ -1,18 +1,40 @@
 {
   "name": "dreamchain-cli",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "A lightweight CLI for turning conversations into trackable tasks.",
+  "keywords": [
+    "cli",
+    "tasks",
+    "productivity",
+    "typescript"
+  ],
+  "homepage": "https://github.com/royalpinto007/dreamchain-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/royalpinto007/dreamchain-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/royalpinto007/dreamchain-cli/issues"
+  },
+  "main": "dist/index.js",
   "bin": {
-    "task": "./dist/index.js"
+    "dreamchain": "./dist/index.js"
+  },
+  "preferGlobal": true,
+  "engines": {
+    "node": ">=18"
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "author": "royalpinto007",
   "license": "ISC",
-  "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "chalk": "^5.6.2",
     "commander": "^14.0.3"
@@ -21,5 +43,10 @@
     "@types/node": "^25.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }
