@@ -36,7 +36,7 @@ function writeDB(data: { tasks: Task[] }) {
 export function createTask(title: string, options: any) {
   const db = readDB();
   const newTask: Task = {
-    id: db.tasks.length + 1,
+    id: Math.max(0, ...db.tasks.map((t) => t.id)) + 1,
     title: title.replace(/^'+|'+$/g, ""),
     description: options.description || "",
     status: "pending",
@@ -98,4 +98,15 @@ export function assignTask(id: number, owner: string) {
 export function getTask(id: number) {
   const db = readDB();
   return db.tasks.find((t) => t.id === id);
+}
+
+export function deleteTask(id: number) {
+  const db = readDB();
+  const task = db.tasks.find((t) => t.id === id);
+
+  if (!task) throw new Error(`Task ${id} not found`);
+
+  db.tasks = db.tasks.filter((t) => t.id !== id);
+  writeDB(db);
+  return task;
 }

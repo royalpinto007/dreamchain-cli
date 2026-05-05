@@ -6,6 +6,7 @@ import listCommand from "./commands/list";
 import updateCommand from "./commands/update";
 import assignCommand from "./commands/assign";
 import viewCommand from "./commands/view";
+import deleteCommand from "./commands/delete";
 
 const program = new Command();
 
@@ -19,5 +20,6 @@ program.addCommand(listCommand);
 program.addCommand(updateCommand);
 program.addCommand(assignCommand);
 program.addCommand(viewCommand);
+program.addCommand(deleteCommand);
 
 program.parse();
